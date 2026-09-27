@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python 3.11
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
@@ -31,7 +31,7 @@ jobs:
         run: |
           docker compose -f topology/docker-compose.yml up -d
           echo "[*] Waiting for BGP neighbor convergence..."
-          sleep 6
+          sleep 8
 
       - name: Extract Pre-Change Operational State Snapshot
         run: |
@@ -50,7 +50,7 @@ jobs:
           python automation/drift_remediator.py --check-only
 
       - name: Archive HTML Test Report & Snapshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: netdevops-ci-validation-artifacts
