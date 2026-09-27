@@ -1,0 +1,1404 @@
+{
+  "timestamp": "2026-09-27T02:58:16.823425",
+  "phase": "post",
+  "nodes": {
+    "netdevops_r1": {
+      "node": "netdevops_r1",
+      "collected_at": "2026-09-27T02:58:17.173965",
+      "bgp_summary": {
+        "ipv4Unicast": {
+          "routerId": "10.0.0.1",
+          "as": 65001,
+          "vrfId": 0,
+          "vrfName": "default",
+          "tableVersion": 5,
+          "ribCount": 7,
+          "ribMemory": 1344,
+          "peerCount": 2,
+          "peerMemory": 1468592,
+          "peers": {
+            "192.168.12.20": {
+              "hostname": "78c8021a69e8",
+              "remoteAs": 65002,
+              "localAs": 65001,
+              "version": 4,
+              "msgRcvd": 16,
+              "msgSent": 16,
+              "tableVersion": 0,
+              "outq": 0,
+              "inq": 0,
+              "peerUptime": "00:01:30",
+              "peerUptimeMsec": 90000,
+              "peerUptimeEstablishedEpoch": 1790477806,
+              "pfxRcd": 2,
+              "pfxSnt": 3,
+              "state": "Established",
+              "peerState": "OK",
+              "connectionsEstablished": 1,
+              "connectionsDropped": 0,
+              "desc": "BGP_PEER_R2",
+              "idType": "ipv4"
+            },
+            "192.168.13.30": {
+              "hostname": "e3358abd3ea8",
+              "remoteAs": 65003,
+              "localAs": 65001,
+              "version": 4,
+              "msgRcvd": 16,
+              "msgSent": 19,
+              "tableVersion": 0,
+              "outq": 0,
+              "inq": 0,
+              "peerUptime": "00:01:30",
+              "peerUptimeMsec": 90000,
+              "peerUptimeEstablishedEpoch": 1790477806,
+              "pfxRcd": 2,
+              "pfxSnt": 3,
+              "state": "Established",
+              "peerState": "OK",
+              "connectionsEstablished": 1,
+              "connectionsDropped": 0,
+              "desc": "BGP_PEER_R3",
+              "idType": "ipv4"
+            }
+          },
+          "failedPeers": 0,
+          "displayedPeers": 2,
+          "totalPeers": 2,
+          "dynamicPeers": 0,
+          "bestPath": {
+            "multiPathRelax": "false"
+          }
+        }
+      },
+      "routes": {
+        "0.0.0.0/0": [
+          {
+            "prefix": "0.0.0.0/0",
+            "prefixLen": 0,
+            "protocol": "kernel",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 6,
+            "installedNexthopGroupId": 6,
+            "uptime": "00:01:35",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.12.1",
+                "afi": "ipv4",
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "10.0.0.1/32": [
+          {
+            "prefix": "10.0.0.1/32",
+            "prefixLen": 32,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 8,
+            "installedNexthopGroupId": 8,
+            "uptime": "00:01:34",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 1,
+                "interfaceName": "lo",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "10.0.0.2/32": [
+          {
+            "prefix": "10.0.0.2/32",
+            "prefixLen": 32,
+            "protocol": "bgp",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 20,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 12,
+            "installedNexthopGroupId": 12,
+            "uptime": "00:01:29",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.12.20",
+                "afi": "ipv4",
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true,
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "10.0.0.3/32": [
+          {
+            "prefix": "10.0.0.3/32",
+            "prefixLen": 32,
+            "protocol": "bgp",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 20,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 11,
+            "installedNexthopGroupId": 11,
+            "uptime": "00:01:29",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.13.30",
+                "afi": "ipv4",
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true,
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "192.168.12.0/24": [
+          {
+            "prefix": "192.168.12.0/24",
+            "prefixLen": 24,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 4,
+            "installedNexthopGroupId": 4,
+            "uptime": "00:01:35",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "192.168.13.0/24": [
+          {
+            "prefix": "192.168.13.0/24",
+            "prefixLen": 24,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 5,
+            "installedNexthopGroupId": 5,
+            "uptime": "00:01:35",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true
+              }
+            ]
+          }
+        ]
+      },
+      "interfaces": [
+        {
+          "ifindex": 1,
+          "ifname": "lo",
+          "flags": [
+            "LOOPBACK",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 65536,
+          "qdisc": "noqueue",
+          "operstate": "UNKNOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "loopback",
+          "address": "00:00:00:00:00:00",
+          "broadcast": "00:00:00:00:00:00",
+          "promiscuity": 0,
+          "min_mtu": 0,
+          "max_mtu": 0,
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 2,
+          "link": null,
+          "ifname": "tunl0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1480,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "ipip",
+          "address": "0.0.0.0",
+          "broadcast": "0.0.0.0",
+          "promiscuity": 0,
+          "min_mtu": 0,
+          "max_mtu": 0,
+          "linkinfo": {
+            "info_kind": "ipip",
+            "info_data": {
+              "proto": "any",
+              "remote": "any",
+              "local": "any",
+              "ttl": 0,
+              "pmtudisc": false
+            }
+          },
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 3,
+          "link": null,
+          "ifname": "sit0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1480,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "sit",
+          "address": "0.0.0.0",
+          "broadcast": "0.0.0.0",
+          "promiscuity": 0,
+          "min_mtu": 1280,
+          "max_mtu": 65555,
+          "linkinfo": {
+            "info_kind": "sit",
+            "info_data": {
+              "proto": "ip6ip",
+              "remote": "any",
+              "local": "any",
+              "ttl": 64,
+              "pmtudisc": false
+            }
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 4,
+          "link": null,
+          "ifname": "ip6tnl0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1452,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "tunnel6",
+          "address": "::",
+          "broadcast": "::",
+          "permaddr": "9ae1:8d07:81a8::",
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "ip6tnl",
+            "info_data": {
+              "proto": "ip6ip6",
+              "remote": "any",
+              "local": "any",
+              "ttl": 0,
+              "encap_limit": 0,
+              "tclass": "0x00",
+              "flowlabel": "0x00000"
+            }
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 5,
+          "link_index": 20,
+          "ifname": "eth0",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "noqueue",
+          "operstate": "UP",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "link_type": "ether",
+          "address": "f6:1e:cc:8a:da:6a",
+          "broadcast": "ff:ff:ff:ff:ff:ff",
+          "link_netnsid": 0,
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "veth"
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 8,
+          "num_rx_queues": 8,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 6,
+          "link_index": 23,
+          "ifname": "eth1",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "noqueue",
+          "operstate": "UP",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "link_type": "ether",
+          "address": "36:bd:ef:62:07:76",
+          "broadcast": "ff:ff:ff:ff:ff:ff",
+          "link_netnsid": 0,
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "veth"
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 8,
+          "num_rx_queues": 8,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        }
+      ]
+    },
+    "netdevops_r2": {
+      "node": "netdevops_r2",
+      "collected_at": "2026-09-27T02:58:17.461900",
+      "bgp_summary": {
+        "ipv4Unicast": {
+          "routerId": "10.0.0.2",
+          "as": 65002,
+          "vrfId": 0,
+          "vrfName": "default",
+          "tableVersion": 3,
+          "ribCount": 7,
+          "ribMemory": 1344,
+          "peerCount": 2,
+          "peerMemory": 1468592,
+          "peers": {
+            "192.168.12.10": {
+              "hostname": "8174e30fe9b0",
+              "remoteAs": 65001,
+              "localAs": 65002,
+              "version": 4,
+              "msgRcvd": 16,
+              "msgSent": 16,
+              "tableVersion": 0,
+              "outq": 0,
+              "inq": 0,
+              "peerUptime": "00:01:30",
+              "peerUptimeMsec": 90000,
+              "peerUptimeEstablishedEpoch": 1790477807,
+              "pfxRcd": 2,
+              "pfxSnt": 3,
+              "state": "Established",
+              "peerState": "OK",
+              "connectionsEstablished": 1,
+              "connectionsDropped": 0,
+              "desc": "BGP_PEER_R1",
+              "idType": "ipv4"
+            },
+            "192.168.23.30": {
+              "hostname": "e3358abd3ea8",
+              "remoteAs": 65003,
+              "localAs": 65002,
+              "version": 4,
+              "msgRcvd": 17,
+              "msgSent": 16,
+              "tableVersion": 0,
+              "outq": 0,
+              "inq": 0,
+              "peerUptime": "00:01:30",
+              "peerUptimeMsec": 90000,
+              "peerUptimeEstablishedEpoch": 1790477807,
+              "pfxRcd": 2,
+              "pfxSnt": 3,
+              "state": "Established",
+              "peerState": "OK",
+              "connectionsEstablished": 1,
+              "connectionsDropped": 0,
+              "desc": "BGP_PEER_R3",
+              "idType": "ipv4"
+            }
+          },
+          "failedPeers": 0,
+          "displayedPeers": 2,
+          "totalPeers": 2,
+          "dynamicPeers": 0,
+          "bestPath": {
+            "multiPathRelax": "false"
+          }
+        }
+      },
+      "routes": {
+        "0.0.0.0/0": [
+          {
+            "prefix": "0.0.0.0/0",
+            "prefixLen": 0,
+            "protocol": "kernel",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 6,
+            "installedNexthopGroupId": 6,
+            "uptime": "00:01:36",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.12.1",
+                "afi": "ipv4",
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "10.0.0.1/32": [
+          {
+            "prefix": "10.0.0.1/32",
+            "prefixLen": 32,
+            "protocol": "bgp",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 20,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 12,
+            "installedNexthopGroupId": 12,
+            "uptime": "00:01:30",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.12.10",
+                "afi": "ipv4",
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true,
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "10.0.0.2/32": [
+          {
+            "prefix": "10.0.0.2/32",
+            "prefixLen": 32,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 8,
+            "installedNexthopGroupId": 8,
+            "uptime": "00:01:35",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 1,
+                "interfaceName": "lo",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "10.0.0.3/32": [
+          {
+            "prefix": "10.0.0.3/32",
+            "prefixLen": 32,
+            "protocol": "bgp",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 20,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 10,
+            "installedNexthopGroupId": 10,
+            "uptime": "00:01:30",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.23.30",
+                "afi": "ipv4",
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true,
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "192.168.12.0/24": [
+          {
+            "prefix": "192.168.12.0/24",
+            "prefixLen": 24,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 4,
+            "installedNexthopGroupId": 4,
+            "uptime": "00:01:36",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "192.168.23.0/24": [
+          {
+            "prefix": "192.168.23.0/24",
+            "prefixLen": 24,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 5,
+            "installedNexthopGroupId": 5,
+            "uptime": "00:01:36",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true
+              }
+            ]
+          }
+        ]
+      },
+      "interfaces": [
+        {
+          "ifindex": 1,
+          "ifname": "lo",
+          "flags": [
+            "LOOPBACK",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 65536,
+          "qdisc": "noqueue",
+          "operstate": "UNKNOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "loopback",
+          "address": "00:00:00:00:00:00",
+          "broadcast": "00:00:00:00:00:00",
+          "promiscuity": 0,
+          "min_mtu": 0,
+          "max_mtu": 0,
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 2,
+          "link": null,
+          "ifname": "tunl0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1480,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "ipip",
+          "address": "0.0.0.0",
+          "broadcast": "0.0.0.0",
+          "promiscuity": 0,
+          "min_mtu": 0,
+          "max_mtu": 0,
+          "linkinfo": {
+            "info_kind": "ipip",
+            "info_data": {
+              "proto": "any",
+              "remote": "any",
+              "local": "any",
+              "ttl": 0,
+              "pmtudisc": false
+            }
+          },
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 3,
+          "link": null,
+          "ifname": "sit0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1480,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "sit",
+          "address": "0.0.0.0",
+          "broadcast": "0.0.0.0",
+          "promiscuity": 0,
+          "min_mtu": 1280,
+          "max_mtu": 65555,
+          "linkinfo": {
+            "info_kind": "sit",
+            "info_data": {
+              "proto": "ip6ip",
+              "remote": "any",
+              "local": "any",
+              "ttl": 64,
+              "pmtudisc": false
+            }
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 4,
+          "link": null,
+          "ifname": "ip6tnl0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1452,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "tunnel6",
+          "address": "::",
+          "broadcast": "::",
+          "permaddr": "ca59:e8cb:903b::",
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "ip6tnl",
+            "info_data": {
+              "proto": "ip6ip6",
+              "remote": "any",
+              "local": "any",
+              "ttl": 0,
+              "encap_limit": 0,
+              "tclass": "0x00",
+              "flowlabel": "0x00000"
+            }
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 5,
+          "link_index": 22,
+          "ifname": "eth0",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "noqueue",
+          "operstate": "UP",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "link_type": "ether",
+          "address": "16:41:ce:d9:eb:3b",
+          "broadcast": "ff:ff:ff:ff:ff:ff",
+          "link_netnsid": 0,
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "veth"
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 8,
+          "num_rx_queues": 8,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 6,
+          "link_index": 24,
+          "ifname": "eth1",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "noqueue",
+          "operstate": "UP",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "link_type": "ether",
+          "address": "8e:e6:93:b1:ed:3a",
+          "broadcast": "ff:ff:ff:ff:ff:ff",
+          "link_netnsid": 0,
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "veth"
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 8,
+          "num_rx_queues": 8,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        }
+      ]
+    },
+    "netdevops_r3": {
+      "node": "netdevops_r3",
+      "collected_at": "2026-09-27T02:58:17.754778",
+      "bgp_summary": {
+        "ipv4Unicast": {
+          "routerId": "10.0.0.3",
+          "as": 65003,
+          "vrfId": 0,
+          "vrfName": "default",
+          "tableVersion": 3,
+          "ribCount": 7,
+          "ribMemory": 1344,
+          "peerCount": 2,
+          "peerMemory": 1468592,
+          "peers": {
+            "192.168.13.10": {
+              "hostname": "8174e30fe9b0",
+              "remoteAs": 65001,
+              "localAs": 65003,
+              "version": 4,
+              "msgRcvd": 19,
+              "msgSent": 16,
+              "tableVersion": 0,
+              "outq": 0,
+              "inq": 0,
+              "peerUptime": "00:01:31",
+              "peerUptimeMsec": 91000,
+              "peerUptimeEstablishedEpoch": 1790477806,
+              "pfxRcd": 2,
+              "pfxSnt": 3,
+              "state": "Established",
+              "peerState": "OK",
+              "connectionsEstablished": 1,
+              "connectionsDropped": 0,
+              "desc": "BGP_PEER_R1",
+              "idType": "ipv4"
+            },
+            "192.168.23.20": {
+              "hostname": "78c8021a69e8",
+              "remoteAs": 65002,
+              "localAs": 65003,
+              "version": 4,
+              "msgRcvd": 13,
+              "msgSent": 16,
+              "tableVersion": 0,
+              "outq": 0,
+              "inq": 0,
+              "peerUptime": "00:01:31",
+              "peerUptimeMsec": 91000,
+              "peerUptimeEstablishedEpoch": 1790477806,
+              "pfxRcd": 2,
+              "pfxSnt": 3,
+              "state": "Established",
+              "peerState": "OK",
+              "connectionsEstablished": 1,
+              "connectionsDropped": 0,
+              "desc": "BGP_PEER_R2",
+              "idType": "ipv4"
+            }
+          },
+          "failedPeers": 0,
+          "displayedPeers": 2,
+          "totalPeers": 2,
+          "dynamicPeers": 0,
+          "bestPath": {
+            "multiPathRelax": "false"
+          }
+        }
+      },
+      "routes": {
+        "0.0.0.0/0": [
+          {
+            "prefix": "0.0.0.0/0",
+            "prefixLen": 0,
+            "protocol": "kernel",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 6,
+            "installedNexthopGroupId": 6,
+            "uptime": "00:01:36",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.13.1",
+                "afi": "ipv4",
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "10.0.0.1/32": [
+          {
+            "prefix": "10.0.0.1/32",
+            "prefixLen": 32,
+            "protocol": "bgp",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 20,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 12,
+            "installedNexthopGroupId": 12,
+            "uptime": "00:01:30",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.13.10",
+                "afi": "ipv4",
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true,
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "10.0.0.2/32": [
+          {
+            "prefix": "10.0.0.2/32",
+            "prefixLen": 32,
+            "protocol": "bgp",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 20,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 10,
+            "installedNexthopGroupId": 10,
+            "uptime": "00:01:30",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "ip": "192.168.23.20",
+                "afi": "ipv4",
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true,
+                "weight": 1
+              }
+            ]
+          }
+        ],
+        "10.0.0.3/32": [
+          {
+            "prefix": "10.0.0.3/32",
+            "prefixLen": 32,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 8,
+            "installedNexthopGroupId": 8,
+            "uptime": "00:01:35",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 1,
+                "interfaceName": "lo",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "192.168.13.0/24": [
+          {
+            "prefix": "192.168.13.0/24",
+            "prefixLen": 24,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 5,
+            "installedNexthopGroupId": 5,
+            "uptime": "00:01:36",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 6,
+                "interfaceName": "eth1",
+                "active": true
+              }
+            ]
+          }
+        ],
+        "192.168.23.0/24": [
+          {
+            "prefix": "192.168.23.0/24",
+            "prefixLen": 24,
+            "protocol": "connected",
+            "vrfId": 0,
+            "vrfName": "default",
+            "selected": true,
+            "destSelected": true,
+            "distance": 0,
+            "metric": 0,
+            "installed": true,
+            "table": 254,
+            "internalStatus": 16,
+            "internalFlags": 8,
+            "internalNextHopNum": 1,
+            "internalNextHopActiveNum": 1,
+            "nexthopGroupId": 4,
+            "installedNexthopGroupId": 4,
+            "uptime": "00:01:36",
+            "nexthops": [
+              {
+                "flags": 3,
+                "fib": true,
+                "directlyConnected": true,
+                "interfaceIndex": 5,
+                "interfaceName": "eth0",
+                "active": true
+              }
+            ]
+          }
+        ]
+      },
+      "interfaces": [
+        {
+          "ifindex": 1,
+          "ifname": "lo",
+          "flags": [
+            "LOOPBACK",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 65536,
+          "qdisc": "noqueue",
+          "operstate": "UNKNOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "loopback",
+          "address": "00:00:00:00:00:00",
+          "broadcast": "00:00:00:00:00:00",
+          "promiscuity": 0,
+          "min_mtu": 0,
+          "max_mtu": 0,
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 2,
+          "link": null,
+          "ifname": "tunl0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1480,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "ipip",
+          "address": "0.0.0.0",
+          "broadcast": "0.0.0.0",
+          "promiscuity": 0,
+          "min_mtu": 0,
+          "max_mtu": 0,
+          "linkinfo": {
+            "info_kind": "ipip",
+            "info_data": {
+              "proto": "any",
+              "remote": "any",
+              "local": "any",
+              "ttl": 0,
+              "pmtudisc": false
+            }
+          },
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 3,
+          "link": null,
+          "ifname": "sit0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1480,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "sit",
+          "address": "0.0.0.0",
+          "broadcast": "0.0.0.0",
+          "promiscuity": 0,
+          "min_mtu": 1280,
+          "max_mtu": 65555,
+          "linkinfo": {
+            "info_kind": "sit",
+            "info_data": {
+              "proto": "ip6ip",
+              "remote": "any",
+              "local": "any",
+              "ttl": 64,
+              "pmtudisc": false
+            }
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 4,
+          "link": null,
+          "ifname": "ip6tnl0",
+          "flags": [
+            "NOARP"
+          ],
+          "mtu": 1452,
+          "qdisc": "noop",
+          "operstate": "DOWN",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "txqlen": 1000,
+          "link_type": "tunnel6",
+          "address": "::",
+          "broadcast": "::",
+          "permaddr": "6aca:a03a:7754::",
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "ip6tnl",
+            "info_data": {
+              "proto": "ip6ip6",
+              "remote": "any",
+              "local": "any",
+              "ttl": 0,
+              "encap_limit": 0,
+              "tclass": "0x00",
+              "flowlabel": "0x00000"
+            }
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 1,
+          "num_rx_queues": 1,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 5,
+          "link_index": 21,
+          "ifname": "eth0",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "noqueue",
+          "operstate": "UP",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "link_type": "ether",
+          "address": "ea:0e:5b:59:af:ba",
+          "broadcast": "ff:ff:ff:ff:ff:ff",
+          "link_netnsid": 0,
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "veth"
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 8,
+          "num_rx_queues": 8,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        },
+        {
+          "ifindex": 6,
+          "link_index": 25,
+          "ifname": "eth1",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "noqueue",
+          "operstate": "UP",
+          "linkmode": "DEFAULT",
+          "group": "default",
+          "link_type": "ether",
+          "address": "1a:b5:b4:aa:4c:93",
+          "broadcast": "ff:ff:ff:ff:ff:ff",
+          "link_netnsid": 0,
+          "promiscuity": 0,
+          "min_mtu": 68,
+          "max_mtu": 65535,
+          "linkinfo": {
+            "info_kind": "veth"
+          },
+          "inet6_addr_gen_mode": "eui64",
+          "num_tx_queues": 8,
+          "num_rx_queues": 8,
+          "gso_max_size": 65536,
+          "gso_max_segs": 65535
+        }
+      ]
+    }
+  }
+}

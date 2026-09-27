@@ -1,0 +1,64 @@
+name: NetDevOps Automated CI/CD Network Validation Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  netdevops-validation:
+    name: Containerized Pre/Post Network State & Regression Assertion Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install NetDevOps Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Deploy Lightweight Containerized Router Testbed
+        run: |
+          docker compose -f topology/docker-compose.yml up -d
+          echo "[*] Waiting for BGP neighbor convergence..."
+          sleep 6
+
+      - name: Extract Pre-Change Operational State Snapshot
+        run: |
+          python automation/snapshot_engine.py --phase pre
+
+      - name: Execute Automated Pytest Network Testbed
+        run: |
+          pytest tests/ -v \
+            --html=artifacts/reports/netdevops_validation_report.html \
+            --self-contained-html \
+            --junitxml=artifacts/reports/junit.xml
+
+      - name: Extract Post-Change State Snapshot & Verify Zero Drift
+        run: |
+          python automation/snapshot_engine.py --phase post
+          python automation/drift_remediator.py --check-only
+
+      - name: Archive HTML Test Report & Snapshots
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: netdevops-ci-validation-artifacts
+          path: |
+            artifacts/reports/
+            artifacts/snapshots/
+
+      - name: Teardown Virtual Router Testbed
+        if: always()
+        run: |
+          docker compose -f topology/docker-compose.yml down -v

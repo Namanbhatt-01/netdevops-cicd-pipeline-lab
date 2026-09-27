@@ -1,0 +1,74 @@
+services:
+  r1:
+    image: frrouting/frr:latest
+    container_name: netdevops_r1
+    privileged: true
+    volumes:
+      - ./configs/daemons:/etc/frr/daemons:ro
+      - ./configs/r1.conf:/etc/frr/frr.conf:ro
+    networks:
+      net_r1_r2:
+        ipv4_address: 192.168.12.10
+      net_r1_r3:
+        ipv4_address: 192.168.13.10
+    deploy:
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 256M
+
+  r2:
+    image: frrouting/frr:latest
+    container_name: netdevops_r2
+    privileged: true
+    volumes:
+      - ./configs/daemons:/etc/frr/daemons:ro
+      - ./configs/r2.conf:/etc/frr/frr.conf:ro
+    networks:
+      net_r1_r2:
+        ipv4_address: 192.168.12.20
+      net_r2_r3:
+        ipv4_address: 192.168.23.20
+    deploy:
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 256M
+
+  r3:
+    image: frrouting/frr:latest
+    container_name: netdevops_r3
+    privileged: true
+    volumes:
+      - ./configs/daemons:/etc/frr/daemons:ro
+      - ./configs/r3.conf:/etc/frr/frr.conf:ro
+    networks:
+      net_r1_r3:
+        ipv4_address: 192.168.13.30
+      net_r2_r3:
+        ipv4_address: 192.168.23.30
+    deploy:
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 256M
+
+networks:
+  net_r1_r2:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.12.0/24
+  net_r1_r3:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.13.0/24
+  net_r2_r3:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.23.0/24
