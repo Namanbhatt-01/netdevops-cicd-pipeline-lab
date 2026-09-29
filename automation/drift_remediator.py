@@ -11,7 +11,11 @@ import os
 import subprocess
 import sys
 from typing import List, Optional
-from models import RemediationPlan
+
+try:
+    from models import RemediationPlan
+except ImportError:
+    from automation.models import RemediationPlan
 
 def run_vtysh(container_name: str, command: str) -> str:
     try:
@@ -22,7 +26,9 @@ def run_vtysh(container_name: str, command: str) -> str:
             check=True
         )
         return res.stdout.strip()
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError:
+        return ""
+    except Exception:
         return ""
 
 class RemediationPlanner:
@@ -53,7 +59,6 @@ class RemediationPlanner:
 class PolicyGate:
     @staticmethod
     def evaluate(plan: RemediationPlan) -> bool:
-        # Automated policy: Allow LOW and MEDIUM risk automatic remediation; require manual approval for HIGH risk
         if plan.risk_level == "HIGH":
             print(f"[POLICY GATE] Blocked execution of HIGH risk plan {plan.plan_id}: Manual operator approval required.")
             return False
@@ -123,7 +128,6 @@ def main():
     if args.check_only:
         sys.exit(1)
 
-    # Build and evaluate remediation plans
     for d in drifts:
         if d["type"] == "BGP_NEIGHBOR_DOWN":
             plan = RemediationPlanner.plan_peer_recovery(d["node"], d["peer_ip"])

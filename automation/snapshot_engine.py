@@ -10,7 +10,11 @@ import os
 import subprocess
 import sys
 from datetime import datetime
-from models import BgpPeer, Route, InterfaceState, CanonicalNetworkState
+
+try:
+    from models import BgpPeer, Route, InterfaceState, CanonicalNetworkState
+except ImportError:
+    from automation.models import BgpPeer, Route, InterfaceState, CanonicalNetworkState
 
 def run_vtysh(container_name: str, command: str) -> str:
     """Executes a command inside the container via vtysh."""
@@ -22,9 +26,9 @@ def run_vtysh(container_name: str, command: str) -> str:
             check=True
         )
         return res.stdout.strip()
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError:
         return "{}"
-    except Exception as e:
+    except Exception:
         return "{}"
 
 def run_ip_cmd(container_name: str, command: str) -> str:
@@ -49,7 +53,7 @@ def parse_canonical_state(node_name: str) -> CanonicalNetworkState:
         ipv4_peers = bgp_json.get("ipv4Unicast", {}).get("peers", {})
         for peer_ip, pdata in ipv4_peers.items():
             state_str = pdata.get("state", "Down")
-            # Map FRR numeric pfxRcvd into state Established
+            # In FRR, if established, pfxRcvd is an integer or state == Established
             if isinstance(pdata.get("pfxRcvd"), int) or state_str == "Established":
                 norm_state = "Established"
                 pfx = pdata.get("pfxRcvd", 0) if isinstance(pdata.get("pfxRcvd"), int) else 0
