@@ -1,141 +1,128 @@
-# 🚀 NetDevOps CI/CD Pipeline with Containerized Network Testing
-### Automated Pre/Post State Verification, Pytest Network Assertions, State Drift Detection & CI Gatekeeping
+# LAB 02: NetDevOps Change Validation & Configuration Drift Remediation
 
-[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)]()
-[![Testing](https://img.shields.io/badge/Test%20Suite-7%2F7%20Passed-brightgreen.svg)]()
-[![Driver](https://img.shields.io/badge/Driver-Scrapli%20%2F%20Netmiko-orange.svg)]()
-[![Topology](https://img.shields.io/badge/Topology-Multi--Router%20FRR%20Mesh-purple.svg)]()
-[![Certification](https://img.shields.io/badge/Cisco%20Alignment-350--901%20DEVCOR-red.svg)]()
+[![NetDevOps CI/CD Validation](https://github.com/Namanbhatt-01/netdevops-cicd-pipeline-lab/actions/workflows/netdevops_ci.yml/badge.svg)](https://github.com/Namanbhatt-01/netdevops-cicd-pipeline-lab/actions/workflows/netdevops_ci.yml)
+[![Pytest Assertions](https://img.shields.io/badge/Pytest-Automated_Gatekeeper-0A9EDC?logo=pytest&logoColor=white)](https://docs.pytest.org/)
+[![FRRouting](https://img.shields.io/badge/Control_Plane-FRRouting_v9.1-orange)](https://frrouting.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+A reproducible NetDevOps CI/CD validation pipeline that evaluates pre/post-change routing states, executes automated Pytest regression assertions, and remediates configuration drift through policy-gated automation. Demonstrated on a containerized multi-node FRRouting reference architecture.
 
 ---
 
-## 📌 1. Executive Summary
+## 1. Problem Statement
 
-This project implements an automated, vendor-agnostic **NetDevOps CI/CD Network Validation Pipeline**:
-* **Test Automation Framework:** Python 3.11 + `pytest` (7/7 tests passed in 1.21s)
-* **Operational Snapshot Engine:** Scrapli / Netmiko / native structured JSON RPC
-* **Virtual Testbed:** Lightweight containerized FRRouting (FRR latest) mesh (`netdevops_r1`, `netdevops_r2`, `netdevops_r3`) running full-mesh eBGP
-* **CI/CD Integration:** GitHub Actions workflow executing automated pre/post change state verification, regression assertions, and PR gatekeeping
-* **Self-Healing Automation:** Automated configuration drift detector and self-healing remediation engine
+Manual network changes in data centers frequently cause silent outages due to incomplete configuration audits, missing routes, or unintended BGP neighbor session teardowns. 
 
-```mermaid
-graph TD
-    PR[Git Pull Request: Network Config / BGP Update] --> CI[GitHub Actions CI Runner]
-    CI --> DKR[Deploy Ephemeral FRR Router Mesh: r1, r2, r3]
-    DKR --> SNAP1[Extract Pre-Change State Snapshot: BGP, Routes, Drops]
-    SNAP1 --> RUN[Apply Proposed Network Configuration]
-    RUN --> PYT[Execute Automated Pytest Assertion Testbed]
-    PYT --> SNAP2[Extract Post-Change State Snapshot]
-    SNAP2 --> DIFF{Assert Zero Drift vs Pre-State}
-    DIFF -->|Zero Drift & Tests Pass| PASS[PR Merged & HTML Report Generated]
-    DIFF -->|Drift Detected / Failure| FAIL[PR Blocked & Auto-Remediation Triggered]
+This repository establishes a **GitOps & NetDevOps Validation Pipeline**:
+1. Normalizes vendor/device operational states into typed **Canonical Domain Models** (`BgpPeer`, `Route`, `InterfaceState`).
+2. Replaces arbitrary sleep timers with deterministic **BGP convergence readiness polling**.
+3. Enforces pre- and post-deployment state assertions via Pytest.
+4. Detects operational drift and applies policy-gated remediation (`RemediationPlanner` $\to$ `PolicyGate` $\to$ `RemediationExecutor`).
+5. Emits machine-readable evidence envelopes for control plane ingestion.
+
+---
+
+## 2. Canonical Domain Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│               RAW DEVICE OUTPUTS (FRR / vtysh)          │
+└────────────────────────────┬────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────┐
+│          CANONICAL DOMAIN ADAPTER (Pydantic)            │
+│  - BgpPeer (peer_ip, remote_as, state, prefixes)        │
+│  - Route (prefix, protocol, next_hops, metric)          │
+│  - InterfaceState (name, oper_up, rx/tx stats, drops)   │
+└────────────────────────────┬────────────────────────────┘
+                             │
+        ┌────────────────────┴────────────────────┐
+        ▼                                         ▼
+┌────────────────────────┐              ┌────────────────────────┐
+│  Pytest State Engine   │              │ Policy-Gated Remediator│
+│  - Adjacency checks    │              │  - Detect Drift        │
+│  - Route installations │              │  - Build Plan          │
+│  - Drop thresholds     │              │  - Policy Approval     │
+└────────────────────────┘              └────────────────────────┘
 ```
 
 ---
 
-## ⚡ 2. Quick Start & Local Execution
+## 3. Policy-Gated Remediation Lifecycle
+
+```
+[ Drift Detected ] ──> [ RemediationPlanner ] ──> [ PolicyGate ]
+                                                        │
+                                    ┌───────────────────┴───────────────────┐
+                                    ▼ (Approved)                            ▼ (High Risk / Rejected)
+                           [ RemediationExecutor ]                  [ Operator Alert ]
+                                    │
+                                    ▼
+                         [ Re-verify Convergence ]
+                                    │
+                         [ Emit Signed Evidence ]
+```
+
+---
+
+## 4. Evidence Envelope Output
+
+The pipeline outputs an execution record to `poc/evidence.json`:
+
+```json
+{
+  "schema_version": "1.0",
+  "experiment": {
+    "id": "netdevops-drift-001",
+    "name": "Automated State Validation and Policy-Gated Drift Remediation"
+  },
+  "execution": {
+    "run_id": "netdevops-20260929-144500",
+    "timestamp": "2026-09-29T14:45:00Z",
+    "environment": "docker-compose",
+    "platform": "darwin-arm64"
+  },
+  "measurements": [
+    { "metric": "pre_change_bgp_peers_established", "value": 6, "mode": "measured" },
+    { "metric": "drift_remediation_recovery_seconds", "value": 3.2, "mode": "measured" },
+    { "metric": "post_remediation_drift_count", "value": 0, "mode": "measured" }
+  ],
+  "assertions": [
+    { "id": "NET-ASSERT-001", "name": "BGP Adjacency Established Across Topology", "passed": true },
+    { "id": "NET-ASSERT-002", "name": "Zero Configuration Drift Post-Remediation", "passed": true }
+  ],
+  "result": "passed"
+}
+```
+
+---
+
+## 5. Quickstart & Local Execution
 
 ### Prerequisites
-* Docker Desktop or OrbStack
-* Python 3.9+ (`pip install -r requirements.txt`)
+- Docker & Docker Compose
+- Python 3.11+
 
-### Run Complete End-to-End Automated Pipeline
+### Execute the Full Automated Pipeline
 ```bash
-# 1. Install dependencies
-pip install -r requirements.txt
+# 1. Start Topology & Run Verification Pipeline
+./run_lab2_experiment.sh
 
-# 2. Run the complete automated experiment
-bash run_lab2_experiment.sh
+# 2. Teardown
+make clean
 ```
 
 ---
 
-## 🧪 3. Live Pytest Assertion Results (100% Pass)
+## 6. Known Limitations
 
-```
-============================= test session starts ==============================
-rootdir: /lab2_netdevops_cicd_pipeline
-plugins: json-report-1.5.0, metadata-3.1.1, html-4.2.0
-collected 7 items                                                              
-
-tests/test_acl_security_drift.py::test_control_plane_security_policy PASSED [ 14%]
-tests/test_bgp_convergence.py::test_bgp_sessions_established PASSED      [ 28%]
-tests/test_bgp_convergence.py::test_bgp_prefix_exchange PASSED           [ 42%]
-tests/test_bgp_convergence.py::test_full_mesh_route_table_convergence PASSED [ 57%]
-tests/test_interface_counters.py::test_interface_operational_status PASSED [ 71%]
-tests/test_interface_counters.py::test_zero_interface_packet_drops PASSED [ 85%]
-tests/test_state_drift_assertion.py::test_zero_bgp_peer_drift PASSED     [100%]
-
-- generated xml file: artifacts/reports/junit.xml -
-- Generated html report: artifacts/reports/netdevops_validation_report.html -
-============================== 7 passed in 1.21s ===============================
-```
+1. **Reference Implementation Scope**: Device driver parsing and command execution currently target FRRouting (`vtysh`) and Linux `iproute2`; production multi-vendor environments would integrate Scrapli/NAPALM/Netmiko adapters for Cisco IOS-XE/NX-OS, Arista EOS, or Juniper JunOS.
+2. **Remediation Risk Gate**: Remediation policies currently operate on a static risk taxonomy (`LOW`, `MEDIUM`, `HIGH`); dynamic blast radius calculation across multi-tenant VRFs is not implemented.
+3. **Execution Environment**: Routing nodes run in Linux network namespaces within Docker containers rather than bare-metal hardware switches.
 
 ---
 
-## 📊 4. State Drift Detection & Self-Healing Telemetry
+## 7. License
 
-### Operational State Snapshot Sampling:
-```
---- Node: netdevops_r1 ---
-[+] BGP Peer 192.168.12.20: Stable (Established | 2 prefixes received)
-[+] BGP Peer 192.168.13.30: Stable (Established | 2 prefixes received)
-[+] Route Table: Healthy (6 installed prefixes)
-
---- Node: netdevops_r2 ---
-[+] BGP Peer 192.168.12.10: Stable (Established | 2 prefixes received)
-[+] BGP Peer 192.168.23.30: Stable (Established | 2 prefixes received)
-[+] Route Table: Healthy (6 installed prefixes)
-
---- Node: netdevops_r3 ---
-[+] BGP Peer 192.168.13.10: Stable (Established | 2 prefixes received)
-[+] BGP Peer 192.168.23.20: Stable (Established | 2 prefixes received)
-[+] Route Table: Healthy (6 installed prefixes)
-```
-
----
-
-## 🏛️ 5. Open-Source vs. Cisco pyATS / Genie Architectural Mapping
-
-Read the full engineering memorandum:  
-📄 **[`docs/pyats_vs_pytest_architecture_memo.md`](file:///Users/namanbhatt/labdirected/lab2_netdevops_cicd_pipeline/docs/pyats_vs_pytest_architecture_memo.md)**
-
-* **pyATS Testbed YAML $\leftrightarrow$ Docker Compose / Scrapli connection dicts**
-* **Genie Parsers (`genie learn`) $\leftrightarrow$ Native JSON RPC / TTP schemas**
-* **`AEtest` $\leftrightarrow$ Python `pytest` fixtures & parametrized assertions**
-* **Genie Diff $\leftrightarrow$ JSON State Snapshot diff engine (`drift_remediator.py`)**
-
----
-
-## 📂 Repository Structure
-
-```
-.
-├── Makefile                                      # Testbed lifecycle commands
-├── requirements.txt                              # Python NetDevOps dependencies
-├── README.md                                     # Main documentation
-├── run_lab2_experiment.sh                        # End-to-end local test runner
-├── .github/workflows/
-│   └── netdevops_ci.yml                          # Production GitHub Actions CI pipeline
-├── topology/
-│   ├── docker-compose.yml                        # 3-router FRR container mesh (r1, r2, r3)
-│   ├── setup_topology.sh                         # Testbed setup script
-│   ├── teardown.sh                               # Testbed cleanup script
-│   └── configs/                                  # Router configs (r1.conf, r2.conf, r3.conf)
-├── automation/
-│   ├── snapshot_engine.py                        # Scrapli/vtysh operational state snapshot engine
-│   ├── drift_remediator.py                       # State drift detector and auto-remediation engine
-│   └── inject_change.py                          # Synthetic failure and drift injection script
-├── tests/
-│   ├── conftest.py                               # Pytest live container fixtures
-│   ├── test_bgp_convergence.py                  # BGP state & prefix assertions
-│   ├── test_interface_counters.py               # Drop counters & MTU assertions
-│   ├── test_acl_security_drift.py               # CoPP security assertions
-│   └── test_state_drift_assertion.py             # Pre vs. Post snapshot drift comparison
-├── artifacts/
-│   ├── reports/                                  # HTML & JUnit test reports
-│   └── snapshots/                                # JSON operational state snapshots
-└── docs/
-    ├── pyats_vs_pytest_architecture_memo.md      # Cisco pyATS/Genie vs pytest analysis
-    └── lab2_proof_report.md                      # Formatted proof telemetry cards
-```
+MIT License. See [LICENSE](LICENSE) for details.

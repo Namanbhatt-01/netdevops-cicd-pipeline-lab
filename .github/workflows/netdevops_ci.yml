@@ -1,10 +1,13 @@
-name: NetDevOps Automated CI/CD Network Validation Pipeline
+name: Lab 02 - NetDevOps CI/CD Network Validation Pipeline
 
 on:
   push:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
+
+permissions:
+  contents: read
 
 jobs:
   netdevops-validation:
@@ -27,11 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Deploy Lightweight Containerized Router Testbed
+      - name: Deploy Containerized Router Testbed
         run: |
           docker compose -f topology/docker-compose.yml up -d
-          echo "[*] Waiting for BGP neighbor convergence..."
-          sleep 8
+
+      - name: Await BGP Adjacency Convergence
+        run: |
+          python scripts/wait_for_bgp.py --timeout 45 --interval 2
 
       - name: Extract Pre-Change Operational State Snapshot
         run: |
